@@ -15,7 +15,9 @@ function Loading() {
         <div></div>
         <div></div>
       </div>
-      <h3>Uploading...</h3>
+      <p>Uploading</p>
+      <p>This May Take Few Seconds,</p>
+      <p>Please Don't Close The Page</p>
       </div>
     </div>
   );
