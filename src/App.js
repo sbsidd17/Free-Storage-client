@@ -25,6 +25,26 @@ function App() {
     setLoading(false)
   };
 
+  async function copyLink() {
+    let link = successUrl;
+    if (link === "") {
+      alert("Nothing To Copy.");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(successUrl);
+      document.querySelector("#copyMsg").style.display = "block";
+      setTimeout(() => {
+        document.querySelector("#copyMsg").style.display = "none";
+      }, 2000);
+    } catch (err) {
+      document.querySelector("#copyMsg").innerText = "Error! Can't Copy"
+      setTimeout(() => {
+        document.querySelector("#copyMsg").innerText = "";
+      }, 2000);
+    }
+  }
+
   return (
     <div>
       {loading === true ? <Loading /> : <div></div>}
@@ -49,9 +69,11 @@ function App() {
         </div>
         <button type="submit">Submit</button>
       </form>
-      <div>
-        {successUrl}
-      </div>
+      {successUrl !== "" ? <div className="display">
+          <input type="text" readOnly id="link" value={successUrl} />
+          <button id="copyBtn" onClick={copyLink}>Copy</button>
+          <p id="copyMsg">Copied</p>
+        </div> : <div></div>}
     </div>
     </div>
   );
